@@ -76,24 +76,11 @@
             </button>
         </div>
 
-        <!-- TARJETA DE REGALO FINAL (QR) - Minimalista -->
-        <div id="final-gift" class="hidden absolute inset-0 bg-black/90 backdrop-blur-xl flex items-center justify-center p-6 animate-pop-in z-[110]">
-            <div class="w-full max-w-sm bg-white rounded-[2rem] shadow-2xl overflow-hidden relative p-8 text-center">
-                
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">✨ ¡Felicidades! ✨</h1>
-                <p class="text-gray-500 text-sm font-medium mb-8">
-                    Ya, ahora sí es en serio.<br>Te quiero mucho ahijada.
-                </p>
-                
-                <!-- CONTENEDOR DEL QR -->
-                <div class="w-64 h-64 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-2 mb-8 relative group">
-                     <!-- Enlace directo proporcionado -->
-                    <img src="https://i.ibb.co/5X9R9fK1/qr-premio.png" alt="Código QR del Premio" class="w-full h-full object-contain rounded-xl">
-                </div>
-
-                <div class="bg-blue-50 text-blue-800 text-xs font-bold py-3 px-6 rounded-full inline-block">
-                    🎟️ Vale por una salida a comer
-                </div>
+        <!-- TARJETA DE REGALO FINAL (SOLO QR) -->
+        <div id="final-gift" class="hidden absolute inset-0 bg-black/95 flex items-center justify-center p-6 animate-pop-in z-[110]">
+            <!-- Solo la imagen del QR en una tarjeta limpia -->
+            <div class="w-full max-w-[320px] bg-white rounded-3xl p-4 shadow-2xl overflow-hidden animate-pop-in">
+                <img src="https://i.ibb.co/5X9R9fK1/qr-premio.png" alt="Código QR" class="w-full h-auto rounded-2xl block">
             </div>
         </div>
     </div>
