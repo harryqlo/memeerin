@@ -61,10 +61,9 @@
         <!-- TROLL FINAL: VIDEO DEFENSA (ALARMA) -->
         <div id="final-troll" class="hidden absolute inset-0 bg-red-900/95 z-[105] flex flex-col items-center justify-center p-4">
             <div class="w-full max-w-md aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-4 border-red-600 mb-8 relative animate-pulse-fast">
-                 <!-- Video Embed -->
+                 <!-- Video Embed - SRC VACÍO AL INICIO PARA EVITAR AUDIO -->
                  <div style="width:100%;height:100%;position:relative;">
-                    <!-- Autoplay activado, Muted 0. Se recargará en JS para activar audio -->
-                    <iframe id="defense-video" src="https://streamable.com/e/7fdk3f?autoplay=1&muted=0" frameborder="0" width="100%" height="100%" allow="autoplay; fullscreen" style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe>
+                    <iframe id="defense-video" src="" data-src="https://streamable.com/e/7fdk3f?autoplay=1&muted=0" frameborder="0" width="100%" height="100%" allow="autoplay; fullscreen" style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe>
                  </div>
             </div>
             

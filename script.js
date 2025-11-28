@@ -248,6 +248,9 @@ function startAnnoyingCat() {
 
 // 6. Terminal Hacker (Secuencia Final)
 function startHackerSequence() {
+    // OCULTAR EL BOTÓN DE DESCARGA PARA QUE NO ESTORBE
+    downloadBtn.style.display = 'none';
+
     hackerScreen.classList.remove('hidden');
     hackerScreen.classList.add('flex');
     
@@ -291,12 +294,11 @@ function startHackerSequence() {
                 finalTroll.classList.remove('hidden');
                 finalTroll.classList.add('animate-pop-in');
                 
-                // TRUCO: Recargar el iframe para forzar el autoplay con audio en móviles
-                const currentSrc = defenseVideo.src;
-                defenseVideo.src = ''; 
-                setTimeout(() => {
-                     defenseVideo.src = currentSrc;
-                }, 100);
+                // INYECTAR URL DEL VIDEO PARA QUE EMPIECE EL SONIDO AHORA, NO ANTES
+                const src = defenseVideo.getAttribute('data-src');
+                if (src) {
+                    defenseVideo.src = src;
+                }
 
                 // MOSTRAR BOTÓN "DESACTIVAR" DESPUÉS DE 4 SEGUNDOS
                 setTimeout(() => {
