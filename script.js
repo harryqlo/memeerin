@@ -1,7 +1,7 @@
 
 // --- CONFIGURACIÓN ---
 
-// Lista de Anuncios con los Links y Fotos que pediste
+// Lista de Anuncios con los Links y Fotos
 const ADS = [
     {
         title: "Ver Perfil Privado",
@@ -11,7 +11,7 @@ const ADS = [
     {
         title: "¡RECLAMAR IPHONE 25!",
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFMlFD01WChB2RF77ahNNRQu9D33hnpjCxcA&s",
-        link: "https://www.youtube.com/watch?v=kp2EE00LDwA&list=RDkp2EE00LDwA&start_radio=1" // Redirección al Chacarron
+        link: "https://www.youtube.com/watch?v=kp2EE00LDwA&list=RDkp2EE00LDwA&start_radio=1" // Video de Chacarron
     },
     {
         title: "¿Móvil Hirviendo?",
@@ -29,7 +29,7 @@ const ADS = [
         link: "https://www.youtube.com/watch?v=CQeezCdF4mk"
     },
     {
-        title: "⛔ NO TOCAR", // ESTA ES LA TRAMPA DE CAOS
+        title: "⛔ NO TOCAR", // TRAMPA CAOS
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIGCphhI-6xubrosaxxUXL4fnfGYvRPOSBXw&s",
         link: "#",
         isTrap: true
@@ -39,39 +39,40 @@ const ADS = [
 // Secuencia de Modales Iniciales
 const PRANK_STEPS = [
     {
-        title: "⚠️ Almacenamiento Lleno",
-        text: "ERROR CRÍTICO: Se ha detectado un exceso de FLOW en su dispositivo.",
-        btn: "Liberar Ahora",
+        title: "⚠️ Espacio Insuficiente",
+        text: "Error de caché: Su dispositivo está sobrecargado de estilo.",
+        btn: "Liberar Espacio",
         type: "alert"
     },
     {
-        title: "Escaneando Sistema...",
+        title: "Verificando Seguridad...",
         media: "https://media.tenor.com/4AOeH4XlZ1EAAAAM/scanner-red-light-green-light.gif", // Radar Scanner
-        btn: "Por favor espere...",
+        btn: "Escanear",
         type: "image"
     },
     {
-        title: "Error de Verificación",
+        title: "¡Amenaza Detectada!",
         media: "https://i.ibb.co/67qgMynM/QVZj-VFNh-S0-Zt-OEp-GZEZ4-QQ.jpg", // Meme Círculo
-        btn: "Reintentar",
+        btn: "Eliminar Virus",
         type: "image"
     },
     {
-        title: "💀 AMENAZA DETECTADA 💀",
-        text: "EL TROYANO.SYS32.EXE HA INFECTADO SU DISPOSITIVO.",
-        btn: "ELIMINAR AHORA",
+        title: "⚠️ ALERTA CRÍTICA",
+        text: "EL TROYANO.GATO.EXE HA TOMADO EL CONTROL DEL AUDIO.",
+        btn: "BLOQUEAR ACCESO",
         type: "alert"
     },
     {
-        title: "ACTIVANDO DEFENSA",
-        media: '<div style="position:relative; width:100%; height:100%; overflow:hidden; border-radius:8px; background:black;"><iframe src="https://streamable.com/e/7fdk3f?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>',
-        btn: "DETENER AUDIO",
+        title: "PROTOCOLO DE DEFENSA",
+        // Video Streamable
+        media: '<div style="position:relative; width:100%; height:100%; overflow:hidden; border-radius:12px; background:black;"><iframe src="https://streamable.com/e/7fdk3f?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>',
+        btn: "IGNORAR ALERTA",
         type: "html"
     },
     {
         title: "Error 404",
         media: "https://cdnl.iconscout.com/lottie/premium/thumb/404-error-page-animation-gif-download-3299960.gif",
-        btn: "Entrar en Modo Seguro",
+        btn: "Modo Recuperación",
         type: "image"
     }
 ];
@@ -100,17 +101,16 @@ const finalGift = document.getElementById('final-gift');
 function initAds() {
     ADS.forEach((ad, index) => {
         const div = document.createElement('div');
-        div.className = `bg-white rounded-[20px] p-3 shadow-sm active:scale-95 transition-transform duration-200 flex flex-col gap-2 animate-float`;
-        div.style.animationDelay = `${index * 0.5}s`;
+        div.className = `bg-white rounded-2xl p-3 shadow-sm active:scale-95 transition-transform duration-300 flex flex-col gap-2 animate-float`;
+        div.style.animationDelay = `${index * 0.8}s`; // Delay escalonado suave
         
         div.innerHTML = `
-            <div class="w-full aspect-square rounded-[14px] bg-gray-50 overflow-hidden relative border border-gray-100">
-                <img src="${ad.img}" class="w-full h-full object-cover">
-                ${index % 2 === 0 ? '<span class="absolute top-2 right-2 bg-purple-200 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">NUEVO</span>' : ''}
+            <div class="w-full aspect-square rounded-xl bg-gray-50 overflow-hidden relative border border-gray-100 group">
+                <img src="${ad.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             </div>
             <div class="px-1">
-                <p class="text-[13px] font-semibold text-gray-800 leading-tight line-clamp-2">${ad.title}</p>
-                <p class="text-[10px] text-gray-400 mt-1">Patrocinado</p>
+                <p class="text-[12px] font-bold text-gray-800 leading-tight line-clamp-2">${ad.title}</p>
+                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-wide">Promocionado</p>
             </div>
         `;
 
@@ -145,7 +145,7 @@ function showStep(index) {
     titleEl.textContent = step.title;
     btnEl.textContent = step.btn;
     
-    // Reset contents
+    // Reset
     textEl.classList.add('hidden');
     mediaEl.classList.add('hidden');
     mediaEl.innerHTML = '';
@@ -155,16 +155,16 @@ function showStep(index) {
         textEl.classList.remove('hidden');
     } else if (step.type === 'image') {
         mediaEl.classList.remove('hidden');
-        mediaEl.innerHTML = `<img src="${step.media}" class="w-full h-auto object-cover max-h-[180px]">`;
+        mediaEl.innerHTML = `<img src="${step.media}" class="w-full h-auto object-cover max-h-[200px]">`;
     } else if (step.type === 'html') {
         mediaEl.classList.remove('hidden');
-        mediaEl.style.height = "180px";
+        mediaEl.style.height = "200px";
         mediaEl.innerHTML = step.media;
     }
 
     modalOverlay.classList.remove('hidden');
 
-    // Remove old event listeners by cloning
+    // Clonar botón para limpiar eventos anteriores
     const newBtn = btnEl.cloneNode(true);
     btnEl.parentNode.replaceChild(newBtn, btnEl);
 
@@ -179,133 +179,149 @@ function activateChaos() {
     if (chaosMode) return;
     chaosMode = true;
     chaosLayer.classList.remove('hidden');
-    // Cambiar colores de fondo aleatoriamente
+    
+    // Efecto estroboscópico de colores
     setInterval(() => {
-        const colors = ['bg-red-500/20', 'bg-blue-500/20', 'bg-yellow-500/20'];
-        chaosLayer.className = `fixed inset-0 pointer-events-none z-40 mix-blend-overlay ${colors[Math.floor(Math.random() * colors.length)]}`;
-    }, 200);
+        const colors = ['bg-red-500/30', 'bg-purple-500/30', 'bg-green-500/30', 'bg-yellow-500/30'];
+        chaosLayer.className = `fixed inset-0 pointer-events-none z-50 mix-blend-overlay transition-colors duration-100 ${colors[Math.floor(Math.random() * colors.length)]}`;
+    }, 150);
     
     mainInterface.classList.add('animate-shake');
-    if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+    
+    // Gato dice cosas locas
+    catMsg.innerText = "¡NO DEBISTE TOCAR ESO!";
 }
 
-// 4. Botón Escurridizo
-function moveButton() {
-    if (buttonMoves >= MAX_BUTTON_MOVES) return;
+// 4. Botón Escurridizo (Lógica Mejorada)
+function moveButton(e) {
+    if (buttonMoves >= MAX_BUTTON_MOVES) {
+        // Permitir click/acción final
+        startHackerSequence();
+        return;
+    }
 
-    // Calcular nueva posición
+    // Prevenir el click real si estamos en fase de movimiento
+    if(e) e.preventDefault();
+
+    // Calcular dimensiones seguras
+    // Usamos window.innerWidth/Height menos el tamaño del botón (aprox 200x60) y un margen
+    const btnWidth = 220; 
+    const btnHeight = 60;
     const padding = 20;
-    const btnWidth = 200; // Ancho estimado si se vuelve absolute
-    const maxW = window.innerWidth - btnWidth - padding;
-    const maxH = window.innerHeight - 100;
-    
-    const randomX = Math.max(padding, Math.random() * maxW);
-    const randomY = Math.max(100, Math.random() * maxH);
 
-    // Cambiar a absolute
+    const safeWidth = window.innerWidth - btnWidth - padding;
+    const safeHeight = window.innerHeight - btnHeight - padding;
+
+    // Posición aleatoria
+    const randomX = Math.max(padding, Math.random() * safeWidth);
+    const randomY = Math.max(padding, Math.random() * safeHeight);
+
+    // Aplicar estilos
     downloadBtn.style.position = 'fixed';
-    downloadBtn.style.width = '200px'; 
     downloadBtn.style.left = `${randomX}px`;
     downloadBtn.style.top = `${randomY}px`;
-    downloadBtn.style.bottom = 'auto';
-    downloadBtn.style.margin = '0';
-    downloadBtn.style.transform = 'translate(0,0)';
+    downloadBtn.style.bottom = 'auto'; // Anular el bottom: 0 original
+    downloadBtn.style.right = 'auto';
+    downloadBtn.style.marginLeft = '0'; // Quitar mx-auto
+    downloadBtn.style.transform = 'none'; // Quitar transformaciones previas
+    downloadBtn.style.zIndex = '100'; // Asegurar que quede encima de todo
     
     // Cambiar texto
-    const texts = ["¡Muy lento!", "¡Ups!", "¡Casi!", "Intenta de nuevo"];
+    const texts = ["¡Uy!", "¡Casi!", "¡Muy lento!", "Intenta otra vez"];
     downloadBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
+    downloadBtn.classList.add('bg-pastel-red'); // Cambiar color a rojo al fallar
     
     buttonMoves++;
 }
 
 // 5. Gato Molesto
 function startAnnoyingCat() {
-    const messages = ["¿Buscando virus?", "Borrando System32...", "Cuidado ahí", "Haz click... si puedes", "Error 404: Cerebro"];
+    const messages = ["Detectando intruso...", "Tus archivos corren peligro", "Error en Capa 8", "¿Seguro que quieres descargar?", "System32 eliminado"];
     
     setInterval(() => {
-        annoyingCat.classList.remove('opacity-0', '-translate-y-24');
+        annoyingCat.classList.remove('opacity-0', '-translate-y-32');
         annoyingCat.classList.add('opacity-100', 'translate-y-0');
         catMsg.textContent = messages[Math.floor(Math.random() * messages.length)];
         
         setTimeout(() => {
-            annoyingCat.classList.add('opacity-0', '-translate-y-24');
+            annoyingCat.classList.add('opacity-0', '-translate-y-32');
             annoyingCat.classList.remove('opacity-100', 'translate-y-0');
-        }, 3000);
-    }, 8000);
+        }, 4000);
+    }, 7000);
 }
 
-// 6. Terminal Hacker (Final)
+// 6. Terminal Hacker (Secuencia Final)
 function startHackerSequence() {
     hackerScreen.classList.remove('hidden');
     hackerScreen.classList.add('flex');
     
     const logs = [
-        "INICIANDO ACCESO ROOT...",
-        "SALTANDO ENCLAVE SEGURO...",
-        "ACCEDIENDO AL LLAVERO DE ICLOUD...",
-        "BYPASSING FIREWALL...",
-        "DESCARGANDO REGALO_SECRETO.ZIP...",
-        "DESCIFRANDO ARCHIVOS...",
-        "ACCESO CONCEDIDO."
+        "ESTABLECIENDO CONEXIÓN SEGURA...",
+        "ACCEDIENDO A MAIN_DB...",
+        "BYPASSING FIREWALL (PORT 443)...",
+        "ENCONTRADO: REGALO_AHIJADA.ZIP...",
+        "DESENCRIPTANDO CLAVE PRIVADA...",
+        "COMPROBANDO IDENTIDAD BIOMÉTRICA...",
+        "ACCESO AUTORIZADO."
     ];
 
     let delay = 0;
     logs.forEach((log, i) => {
-        delay += Math.random() * 800 + 500;
+        delay += Math.random() * 600 + 400; // Delay aleatorio entre líneas
         setTimeout(() => {
             const p = document.createElement('div');
-            p.className = "mb-2 break-all";
-            p.innerHTML = `<span class="mr-2 text-white/50">></span>${log}`;
+            p.className = "mb-2 font-mono break-all leading-tight";
+            p.innerHTML = `<span class="mr-2 text-green-700 font-bold">></span>${log}`;
             terminalContent.appendChild(p);
             
             // Auto scroll
             const cursor = document.createElement('span');
-            cursor.className = 'cursor-blink';
+            cursor.className = 'cursor-blink inline-block w-2 h-4 bg-green-500 ml-1 align-middle';
             p.appendChild(cursor);
             
-            // Remove previous cursor
+            // Borrar cursor anterior
             const prev = terminalContent.children[terminalContent.children.length - 2];
             if(prev && prev.querySelector('.cursor-blink')) {
                 prev.querySelector('.cursor-blink').remove();
             }
             
-            window.scrollTo(0, document.body.scrollHeight);
+            // Scroll automático al fondo
+            // Ajustamos para que scrolee el contenedor, no el body
+            const container = document.getElementById('terminal-content');
+            container.scrollTop = container.scrollHeight;
 
         }, delay);
 
         if (i === logs.length - 1) {
             setTimeout(() => {
                 finalGift.classList.remove('hidden');
-            }, delay + 1500);
+            }, delay + 1000);
         }
     });
 }
 
-// --- EVENT LISTENERS ---
+// --- INITIALIZATION ---
 
-// Al cargar
 window.addEventListener('load', () => {
     initAds();
-    // Pequeño delay para la primera broma
+    // Delay para dar sensación de carga
     setTimeout(() => {
         showStep(0);
-    }, 500);
+    }, 800);
 });
 
-// Botón de Descarga
-downloadBtn.addEventListener('click', (e) => {
+// Eventos del Botón
+// Usamos 'touchstart' y 'mousedown' para mejor respuesta
+const handleBtnInteraction = (e) => {
+    // Si aún no ha completado los movimientos, interceptamos
     if (buttonMoves < MAX_BUTTON_MOVES) {
-        moveButton();
+        moveButton(e);
     } else {
-        // Éxito
+        // Dejar pasar para que clickee
         startHackerSequence();
     }
-});
+};
 
-downloadBtn.addEventListener('mouseover', moveButton);
-downloadBtn.addEventListener('touchstart', (e) => {
-    if (buttonMoves < MAX_BUTTON_MOVES) {
-        // e.preventDefault(); // Comentado para permitir click en el ultimo intento
-        moveButton();
-    }
-}, {passive: true});
+downloadBtn.addEventListener('mousedown', handleBtnInteraction);
+downloadBtn.addEventListener('touchstart', handleBtnInteraction, { passive: false });
