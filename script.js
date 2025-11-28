@@ -1,7 +1,7 @@
 
 // --- CONFIGURACIÓN ---
 
-// Lista de Anuncios con los Links y Fotos
+// Lista de Anuncios
 const ADS = [
     {
         title: "Ver Perfil Privado",
@@ -36,7 +36,7 @@ const ADS = [
     }
 ];
 
-// Secuencia de Modales Iniciales
+// Secuencia de Modales Iniciales (SIN VIDEO AQUÍ, SOLO ALERTAS)
 const PRANK_STEPS = [
     {
         title: "⚠️ Espacio Insuficiente",
@@ -46,13 +46,13 @@ const PRANK_STEPS = [
     },
     {
         title: "Verificando Seguridad...",
-        media: "https://media.tenor.com/4AOeH4XlZ1EAAAAM/scanner-red-light-green-light.gif", // Radar Scanner
+        media: "https://media.tenor.com/4AOeH4XlZ1EAAAAM/scanner-red-light-green-light.gif",
         btn: "Escanear",
         type: "image"
     },
     {
         title: "¡Amenaza Detectada!",
-        media: "https://i.ibb.co/67qgMynM/QVZj-VFNh-S0-Zt-OEp-GZEZ4-QQ.jpg", // Meme Círculo
+        media: "https://i.ibb.co/67qgMynM/QVZj-VFNh-S0-Zt-OEp-GZEZ4-QQ.jpg",
         btn: "Eliminar Virus",
         type: "image"
     },
@@ -61,13 +61,6 @@ const PRANK_STEPS = [
         text: "EL TROYANO.GATO.EXE HA TOMADO EL CONTROL DEL AUDIO.",
         btn: "BLOQUEAR ACCESO",
         type: "alert"
-    },
-    {
-        title: "PROTOCOLO DE DEFENSA",
-        // Video Streamable
-        media: '<div style="position:relative; width:100%; height:100%; overflow:hidden; border-radius:12px; background:black;"><iframe src="https://streamable.com/e/7fdk3f?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>',
-        btn: "IGNORAR ALERTA",
-        type: "html"
     },
     {
         title: "Error 404",
@@ -93,6 +86,7 @@ const annoyingCat = document.getElementById('annoying-cat');
 const catMsg = document.getElementById('cat-msg');
 const hackerScreen = document.getElementById('hacker-screen');
 const terminalContent = document.getElementById('terminal-content');
+const finalTroll = document.getElementById('final-troll');
 const finalGift = document.getElementById('final-gift');
 
 // --- FUNCIONES ---
@@ -101,8 +95,8 @@ const finalGift = document.getElementById('final-gift');
 function initAds() {
     ADS.forEach((ad, index) => {
         const div = document.createElement('div');
-        div.className = `bg-white rounded-2xl p-3 shadow-sm active:scale-95 transition-transform duration-300 flex flex-col gap-2 animate-float`;
-        div.style.animationDelay = `${index * 0.8}s`; // Delay escalonado suave
+        div.className = `bg-white rounded-2xl p-3 shadow-sm active:scale-95 transition-transform duration-300 flex flex-col gap-2 animate-float cursor-pointer`;
+        div.style.animationDelay = `${index * 0.8}s`;
         
         div.innerHTML = `
             <div class="w-full aspect-square rounded-xl bg-gray-50 overflow-hidden relative border border-gray-100 group">
@@ -129,7 +123,6 @@ function initAds() {
 // 2. Gestionar Secuencia de Bromas
 function showStep(index) {
     if (index >= PRANK_STEPS.length) {
-        // Fin de la secuencia inicial
         modalOverlay.classList.add('hidden');
         mainInterface.classList.remove('blur-[2px]');
         startAnnoyingCat();
@@ -145,7 +138,6 @@ function showStep(index) {
     titleEl.textContent = step.title;
     btnEl.textContent = step.btn;
     
-    // Reset
     textEl.classList.add('hidden');
     mediaEl.classList.add('hidden');
     mediaEl.innerHTML = '';
@@ -156,15 +148,10 @@ function showStep(index) {
     } else if (step.type === 'image') {
         mediaEl.classList.remove('hidden');
         mediaEl.innerHTML = `<img src="${step.media}" class="w-full h-auto object-cover max-h-[200px]">`;
-    } else if (step.type === 'html') {
-        mediaEl.classList.remove('hidden');
-        mediaEl.style.height = "200px";
-        mediaEl.innerHTML = step.media;
     }
 
     modalOverlay.classList.remove('hidden');
 
-    // Clonar botón para limpiar eventos anteriores
     const newBtn = btnEl.cloneNode(true);
     btnEl.parentNode.replaceChild(newBtn, btnEl);
 
@@ -180,7 +167,6 @@ function activateChaos() {
     chaosMode = true;
     chaosLayer.classList.remove('hidden');
     
-    // Efecto estroboscópico de colores
     setInterval(() => {
         const colors = ['bg-red-500/30', 'bg-purple-500/30', 'bg-green-500/30', 'bg-yellow-500/30'];
         chaosLayer.className = `fixed inset-0 pointer-events-none z-50 mix-blend-overlay transition-colors duration-100 ${colors[Math.floor(Math.random() * colors.length)]}`;
@@ -188,56 +174,48 @@ function activateChaos() {
     
     mainInterface.classList.add('animate-shake');
     if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
-    
-    // Gato dice cosas locas
     catMsg.innerText = "¡NO DEBISTE TOCAR ESO!";
 }
 
-// 4. Botón Escurridizo (Lógica Mejorada)
+// 4. Botón Escurridizo
 function moveButton(e) {
     if (buttonMoves >= MAX_BUTTON_MOVES) {
-        // Permitir click/acción final
         startHackerSequence();
         return;
     }
 
-    // Prevenir el click real si estamos en fase de movimiento
     if(e) e.preventDefault();
 
-    // Calcular dimensiones seguras
-    // Usamos window.innerWidth/Height menos el tamaño del botón (aprox 200x60) y un margen
     const btnWidth = 220; 
-    const btnHeight = 60;
+    const btnHeight = 70;
     const padding = 20;
 
     const safeWidth = window.innerWidth - btnWidth - padding;
     const safeHeight = window.innerHeight - btnHeight - padding;
 
-    // Posición aleatoria
     const randomX = Math.max(padding, Math.random() * safeWidth);
     const randomY = Math.max(padding, Math.random() * safeHeight);
 
-    // Aplicar estilos
     downloadBtn.style.position = 'fixed';
     downloadBtn.style.left = `${randomX}px`;
     downloadBtn.style.top = `${randomY}px`;
-    downloadBtn.style.bottom = 'auto'; // Anular el bottom: 0 original
+    downloadBtn.style.bottom = 'auto';
     downloadBtn.style.right = 'auto';
-    downloadBtn.style.marginLeft = '0'; // Quitar mx-auto
-    downloadBtn.style.transform = 'none'; // Quitar transformaciones previas
-    downloadBtn.style.zIndex = '100'; // Asegurar que quede encima de todo
+    downloadBtn.style.marginLeft = '0';
+    downloadBtn.style.transform = 'none';
+    downloadBtn.style.zIndex = '100';
     
-    // Cambiar texto
     const texts = ["¡Uy!", "¡Casi!", "¡Muy lento!", "Intenta otra vez"];
     downloadBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
-    downloadBtn.classList.add('bg-pastel-red'); // Cambiar color a rojo al fallar
+    downloadBtn.classList.remove('bg-brand-primary');
+    downloadBtn.classList.add('bg-pastel-red');
     
     buttonMoves++;
 }
 
 // 5. Gato Molesto
 function startAnnoyingCat() {
-    const messages = ["Detectando intruso...", "Tus archivos corren peligro", "Error en Capa 8", "¿Seguro que quieres descargar?", "System32 eliminado"];
+    const messages = ["Detectando intruso...", "Tus archivos corren peligro", "¿Seguro que quieres descargar?", "System32 eliminado"];
     
     setInterval(() => {
         annoyingCat.classList.remove('opacity-0', '-translate-y-32');
@@ -262,63 +240,64 @@ function startHackerSequence() {
         "BYPASSING FIREWALL (PORT 443)...",
         "ENCONTRADO: REGALO_AHIJADA.ZIP...",
         "DESENCRIPTANDO CLAVE PRIVADA...",
-        "COMPROBANDO IDENTIDAD BIOMÉTRICA...",
-        "ACCESO AUTORIZADO."
+        "ACTIVANDO PROTOCOLO DEFENSA...",
+        "ERROR CRÍTICO: INTRUSO DETECTADO."
     ];
 
     let delay = 0;
     logs.forEach((log, i) => {
-        delay += Math.random() * 600 + 400; // Delay aleatorio entre líneas
+        delay += Math.random() * 600 + 400;
         setTimeout(() => {
             const p = document.createElement('div');
             p.className = "mb-2 font-mono break-all leading-tight";
             p.innerHTML = `<span class="mr-2 text-green-700 font-bold">></span>${log}`;
             terminalContent.appendChild(p);
             
-            // Auto scroll
             const cursor = document.createElement('span');
             cursor.className = 'cursor-blink inline-block w-2 h-4 bg-green-500 ml-1 align-middle';
             p.appendChild(cursor);
             
-            // Borrar cursor anterior
             const prev = terminalContent.children[terminalContent.children.length - 2];
             if(prev && prev.querySelector('.cursor-blink')) {
                 prev.querySelector('.cursor-blink').remove();
             }
             
-            // Scroll automático al fondo
-            // Ajustamos para que scrolee el contenedor, no el body
             const container = document.getElementById('terminal-content');
             container.scrollTop = container.scrollHeight;
 
         }, delay);
 
         if (i === logs.length - 1) {
+            // AL TERMINAR LOGS, MOSTRAR VIDEO DE DEFENSA (NO QR AUN)
             setTimeout(() => {
-                finalGift.classList.remove('hidden');
+                finalTroll.classList.remove('hidden');
+                finalTroll.classList.add('animate-pop-in');
             }, delay + 1000);
         }
     });
+}
+
+// 7. Detener Defensa y Mostrar QR
+function stopDefenseAndShowGift() {
+    finalTroll.classList.add('hidden'); // Ocultar video
+    finalGift.classList.remove('hidden'); // Mostrar QR
+    // Lanzar confeti si es posible (opcional)
 }
 
 // --- INITIALIZATION ---
 
 window.addEventListener('load', () => {
     initAds();
-    // Delay para dar sensación de carga
     setTimeout(() => {
         showStep(0);
     }, 800);
 });
 
 // Eventos del Botón
-// Usamos 'touchstart' y 'mousedown' para mejor respuesta
 const handleBtnInteraction = (e) => {
-    // Si aún no ha completado los movimientos, interceptamos
     if (buttonMoves < MAX_BUTTON_MOVES) {
         moveButton(e);
     } else {
-        // Dejar pasar para que clickee
         startHackerSequence();
     }
 };
