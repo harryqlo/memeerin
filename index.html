@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>📦 Descarga Lista - SecureTransfer</title>
+    <title>📦 Descarga Lista - TransferCloud</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,15 +11,15 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-bg': '#F3F4F6',
+                        'brand-bg': '#F8FAFC',
                         'brand-card': '#FFFFFF',
-                        'brand-primary': '#0061FF',
-                        'brand-text': '#1E1928',
-                        'pastel-red': '#FF8BA7',
+                        'brand-primary': '#0066FF',
+                        'brand-dark': '#0F172A',
+                        'pastel-red': '#FDA4AF',
                     },
                     fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
                     },
                     animation: {
                         'pop-in': 'popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -31,23 +31,23 @@
     </script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-brand-bg text-brand-text overflow-hidden font-sans select-none touch-manipulation">
+<body class="bg-brand-bg text-brand-dark overflow-hidden font-sans select-none touch-manipulation">
 
     <!-- CAPA DE CAOS (Oculta por defecto) -->
     <div id="chaos-layer" class="fixed inset-0 pointer-events-none z-50 hidden"></div>
 
-    <!-- NOTIFICACIÓN TIPO WHATSAPP (Gato Molesto Chileno) -->
+    <!-- NOTIFICACIÓN FLOTANTE (Gato Molesto Chileno) -->
     <div id="annoying-cat" class="fixed top-4 left-0 right-0 z-[70] flex justify-center transition-all duration-500 -translate-y-32 opacity-0 pointer-events-none px-4">
-        <div class="bg-white/95 backdrop-blur shadow-2xl rounded-2xl p-4 flex items-center gap-3 border border-gray-100 w-full max-w-[340px] transform hover:scale-105 transition-transform">
+        <div class="bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl p-4 flex items-center gap-3 border border-gray-100 w-full max-w-[340px] transform hover:scale-105 transition-transform">
             <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white text-xl shadow-lg shadow-green-500/30">
                 💬
             </div>
             <div class="flex-1 min-w-0">
                 <div class="flex justify-between items-baseline mb-1">
-                    <p class="text-[12px] font-bold text-gray-900">Mensaje Nuevo</p>
+                    <p class="text-[13px] font-bold text-gray-900">Mensaje Nuevo</p>
                     <span class="text-[10px] text-gray-400">Ahora</span>
                 </div>
-                <p id="cat-msg" class="text-sm text-gray-600 truncate leading-tight">Texto del mensaje...</p>
+                <p id="cat-msg" class="text-sm text-gray-600 truncate leading-tight font-medium">...</p>
             </div>
         </div>
     </div>
@@ -59,143 +59,119 @@
         <div id="terminal-content" class="p-4 mt-10 mb-20 h-full overflow-y-auto pb-32"></div>
         
         <!-- TROLL FINAL: VIDEO DEFENSA (ALARMA) -->
-        <div id="final-troll" class="hidden absolute inset-0 bg-red-900/95 z-[105] flex flex-col items-center justify-center p-4">
-            <div class="w-full max-w-md aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-4 border-red-600 mb-8 relative animate-pulse-fast">
-                 <!-- Video Embed - SRC VACÍO AL INICIO PARA EVITAR AUDIO -->
+        <div id="final-troll" class="hidden absolute inset-0 bg-red-950/95 z-[105] flex flex-col items-center justify-center p-4">
+            <div class="w-full max-w-md aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-2 border-red-600 mb-8 relative animate-pulse-fast">
+                 <!-- SRC VACÍO AL INICIO. JS LO LLENA AL FINAL PARA ACTIVAR AUDIO -->
                  <div style="width:100%;height:100%;position:relative;">
                     <iframe id="defense-video" src="" data-src="https://streamable.com/e/7fdk3f?autoplay=1&muted=0" frameborder="0" width="100%" height="100%" allow="autoplay; fullscreen" style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe>
                  </div>
             </div>
             
-            <h2 class="text-white text-3xl font-black mb-2 text-center tracking-tighter uppercase glitch-text">⚠️ INTRUSO DETECTADO ⚠️</h2>
-            <p class="text-red-200 text-center mb-10 text-sm font-mono tracking-widest">PROTOCOL_DESTRUCTION_INIT_v9.exe</p>
+            <h2 class="text-white text-2xl font-black mb-2 text-center tracking-tighter uppercase glitch-text">⚠️ INTRUSO DETECTADO ⚠️</h2>
+            <p class="text-red-300 text-center mb-10 text-xs font-mono tracking-widest">PROTOCOL_DESTRUCTION_INIT_v9.exe</p>
             
             <!-- Botón oculto inicialmente (aparece a los 4s) -->
-            <button id="defense-btn" onclick="stopDefenseAndShowGift()" class="hidden w-full max-w-[280px] bg-green-500 hover:bg-green-400 text-white font-black py-4 rounded-xl shadow-[0_0_30px_rgba(34,197,94,0.6)] animate-bounce active:scale-95 transition-transform uppercase tracking-widest border-b-4 border-green-700 text-lg">
+            <button id="defense-btn" onclick="stopDefenseAndShowGift()" class="hidden w-full max-w-[280px] bg-green-600 hover:bg-green-500 text-white font-black py-4 rounded-xl shadow-[0_0_30px_rgba(34,197,94,0.4)] active:scale-95 transition-transform uppercase tracking-widest text-lg animate-pop-in">
                 🛠️ DESACTIVAR ALARMA
             </button>
         </div>
 
-        <!-- TARJETA DE REGALO FINAL (QR) -->
-        <div id="final-gift" class="hidden absolute inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center p-6 animate-pop-in z-[110]">
-            <div class="w-full max-w-sm bg-white rounded-[2rem] shadow-2xl overflow-hidden relative border border-gray-200">
-                <!-- Cabecera estilo Apple Wallet -->
-                <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-center text-white relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-lg">🎁</div>
-                        <h1 class="text-2xl font-bold tracking-tight">¡ACCESO CONCEDIDO!</h1>
-                        <p class="text-blue-100 text-xs font-medium mt-2 uppercase tracking-widest opacity-80">Premio Desbloqueado</p>
-                    </div>
-                </div>
+        <!-- TARJETA DE REGALO FINAL (QR) - Minimalista -->
+        <div id="final-gift" class="hidden absolute inset-0 bg-black/90 backdrop-blur-xl flex items-center justify-center p-6 animate-pop-in z-[110]">
+            <div class="w-full max-w-sm bg-white rounded-[2rem] shadow-2xl overflow-hidden relative p-8 text-center">
                 
-                <!-- Cuerpo Tarjeta -->
-                <div class="p-8 flex flex-col items-center text-center bg-white relative">
-                    <p class="text-gray-500 font-medium mb-8 text-sm leading-relaxed">
-                        Escanea para reclamar tu premio, ahijada.<br>
-                        <span class="text-xs text-gray-400">(Es en serio, ya no hay bromas)</span>
-                    </p>
-                    
-                    <!-- CONTENEDOR DEL QR PRO -->
-                    <div class="w-64 h-64 bg-white rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 p-3 flex items-center justify-center mb-8 relative group hover:scale-105 transition-transform duration-300">
-                        <!-- Esquinas Decorativas -->
-                        <div class="absolute top-4 left-4 w-4 h-4 border-t-4 border-l-4 border-blue-500 rounded-tl-md"></div>
-                        <div class="absolute top-4 right-4 w-4 h-4 border-t-4 border-r-4 border-blue-500 rounded-tr-md"></div>
-                        <div class="absolute bottom-4 left-4 w-4 h-4 border-b-4 border-l-4 border-blue-500 rounded-bl-md"></div>
-                        <div class="absolute bottom-4 right-4 w-4 h-4 border-b-4 border-r-4 border-blue-500 rounded-br-md"></div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">✨ ¡Felicidades! ✨</h1>
+                <p class="text-gray-500 text-sm font-medium mb-8">
+                    Ya, ahora sí es en serio.<br>Te quiero mucho ahijada.
+                </p>
+                
+                <!-- CONTENEDOR DEL QR -->
+                <div class="w-64 h-64 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-2 mb-8 relative group">
+                     <!-- Enlace directo proporcionado -->
+                    <img src="https://i.ibb.co/5X9R9fK1/qr-premio.png" alt="Código QR del Premio" class="w-full h-full object-contain rounded-xl">
+                </div>
 
-                        <!-- Imagen QR (Link Directo) -->
-                        <img src="https://i.ibb.co/5X9R9fK1/qr-premio.png" alt="Código QR del Premio" class="w-full h-full object-contain rounded-xl">
-                    </div>
-
-                    <button onclick="location.reload()" class="w-full py-4 bg-gray-900 hover:bg-black text-white font-bold rounded-xl active:scale-95 transition-transform shadow-lg text-sm tracking-wide">
-                        Cerrar Sesión Segura
-                    </button>
+                <div class="bg-blue-50 text-blue-800 text-xs font-bold py-3 px-6 rounded-full inline-block">
+                    🎟️ Vale por una salida a comer
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODALES DE BROMAS (Secuencia) -->
-    <div id="prank-modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-6 hidden transition-opacity duration-300">
-        <div class="w-full max-w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl text-center overflow-hidden shadow-2xl animate-pop-in transform transition-all">
+    <!-- MODALES DE BROMAS -->
+    <div id="prank-modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-6 hidden transition-opacity duration-300">
+        <div class="w-full max-w-[320px] bg-white rounded-[1.5rem] text-center overflow-hidden shadow-2xl animate-pop-in transform transition-all">
             <div class="p-6">
-                <h3 id="modal-title" class="font-bold text-lg mb-2 text-black leading-tight">Título</h3>
-                <p id="modal-text" class="text-sm text-gray-600 hidden">Texto</p>
-                <div id="modal-media" class="mt-4 rounded-xl overflow-hidden hidden shadow-sm border border-gray-100 bg-gray-50"></div>
+                <h3 id="modal-title" class="font-bold text-lg mb-2 text-gray-900 leading-tight">...</h3>
+                <p id="modal-text" class="text-sm text-gray-600 hidden">...</p>
+                <div id="modal-media" class="mt-4 rounded-xl overflow-hidden hidden bg-gray-50 border border-gray-100"></div>
             </div>
-            <div class="border-t border-gray-200 flex">
-                <button id="modal-btn" class="flex-1 py-4 text-[17px] font-semibold text-brand-primary active:bg-gray-50 transition-colors">
+            <div class="border-t border-gray-100 flex p-1">
+                <button id="modal-btn" class="flex-1 py-3 text-[17px] font-semibold text-brand-primary active:bg-blue-50 rounded-xl transition-colors">
                     Aceptar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- INTERFAZ PRINCIPAL -->
-    <div id="main-interface" class="relative h-screen flex flex-col transition-all duration-300 bg-brand-bg">
+    <!-- INTERFAZ PRINCIPAL (Transferencia) -->
+    <div id="main-interface" class="relative h-screen flex flex-col bg-brand-bg transition-all duration-300">
         
-        <!-- Barra Superior -->
-        <div class="px-6 pt-10 pb-4 flex justify-between items-center bg-white/90 z-20 sticky top-0 shadow-sm backdrop-blur-md">
+        <!-- Header -->
+        <div class="px-6 pt-8 pb-4 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-20 border-b border-gray-100">
             <div class="flex items-center gap-2">
-                <div class="w-9 h-9 bg-brand-primary rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30 text-lg">T</div>
-                <span class="font-bold text-xl tracking-tight text-gray-900">TransferCloud</span>
+                <div class="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">T</div>
+                <span class="font-bold text-lg tracking-tight text-gray-900">TransferCloud</span>
             </div>
-            <div class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200 shadow-sm">
-                <span class="text-base">👤</span>
+            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                <span class="text-sm opacity-50">👤</span>
             </div>
         </div>
 
-        <!-- Contenido Web SCROLLABLE -->
-        <div class="flex-1 overflow-y-auto px-5 pt-6 no-scrollbar relative">
+        <!-- Contenido Scrollable -->
+        <div class="flex-1 overflow-y-auto px-5 pt-6 pb-32 no-scrollbar relative">
             
-            <!-- Tarjeta de Archivo -->
-            <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 mb-8 text-center relative overflow-hidden group hover:shadow-md transition-shadow">
-                <div class="w-24 h-24 bg-blue-50 rounded-[1.5rem] mx-auto flex items-center justify-center text-5xl mb-5 text-brand-primary shadow-inner group-hover:scale-110 transition-transform duration-500">
-                    📂
+            <!-- Archivo Principal -->
+            <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 mb-8 text-center relative overflow-hidden">
+                <div class="w-20 h-20 bg-blue-50 rounded-2xl mx-auto flex items-center justify-center text-4xl mb-4 text-brand-primary">
+                    🎁
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-2 tracking-tight">Paquete Listo</h2>
-                <p class="text-gray-500 text-sm mb-6 font-medium">regalo_sorpresa_final.zip • 1.2 GB</p>
+                <h2 class="text-xl font-bold text-gray-900 mb-1">Paquete Listo</h2>
+                <p class="text-gray-400 text-xs font-medium uppercase tracking-wider mb-6">regalo_sorpresa_final.zip • 1.2 GB</p>
                 
-                <div class="flex items-center justify-center gap-2 text-[11px] text-green-700 font-bold bg-green-50 py-2.5 px-5 rounded-full mx-auto w-fit border border-green-100">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Verificado por Antivirus
+                <div class="inline-flex items-center gap-2 text-[10px] text-green-700 font-bold bg-green-50 py-2 px-4 rounded-full border border-green-100">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Seguro & Verificado
                 </div>
             </div>
 
-            <!-- Sección de "Enlaces Recomendados" -->
-            <div class="mb-5 flex items-center gap-3 opacity-60">
-                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Novedades</span>
+            <!-- Ads (Widgets) -->
+            <div class="mb-4 flex items-center gap-3 opacity-40 px-1">
+                <span class="text-[10px] font-bold uppercase tracking-widest">Patrocinado</span>
                 <div class="h-[1px] bg-gray-300 flex-1"></div>
             </div>
             
-            <div id="ads-grid" class="grid grid-cols-2 gap-4 pb-10">
-                <!-- Los anuncios se generan con JS -->
+            <div id="ads-grid" class="grid grid-cols-2 gap-3 mb-12">
+                <!-- JS Genera esto -->
             </div>
 
-            <p class="text-center text-[10px] text-gray-300 leading-relaxed font-mono mb-12">
-                Secure Server ID: CL-SANTIAGO-8492<br>
-                Encryption: AES-256 (Military Grade)
+            <p class="text-center text-[9px] text-gray-300 font-mono mb-8">
+                SERVER_ID: SANTIAGO_CL_8942<br>ENCRYPTION: 256-BIT SSL
             </p>
 
-            <!-- ESPACIO PARA SCROLL -->
-            <div class="h-4"></div>
+            <!-- ESPACIO EXTRA PARA SCROLL -->
+            <div class="h-10"></div>
 
-            <!-- BOTÓN DE DESCARGA (AL FINAL, REQUIERE SCROLL) -->
-            <div class="pb-20 pt-2 px-2">
-                <button id="download-btn" class="w-full h-[70px] bg-brand-primary text-white font-bold rounded-2xl text-lg shadow-xl shadow-blue-500/40 active:scale-95 transition-all duration-200 flex items-center justify-center relative overflow-hidden group">
-                    <span class="relative z-10 flex items-center gap-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Descargar Archivo
-                    </span>
-                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            <!-- BOTÓN DE DESCARGA (Al final) -->
+            <div class="pb-10 px-1">
+                <button id="download-btn" class="w-full h-[64px] bg-brand-primary text-white font-bold rounded-2xl text-lg shadow-lg shadow-blue-500/30 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 relative overflow-hidden z-10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Descargar Archivo
                 </button>
-                <p class="text-center text-xs text-gray-400 mt-4">Términos y Condiciones • Política de Privacidad</p>
+                <p class="text-center text-[10px] text-gray-400 mt-3">Términos • Privacidad</p>
             </div>
         </div>
-
     </div>
 
-    <!-- Importar el script lógico -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,13 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
-/* Reset básico para móvil */
+/* Reset */
 body {
     -webkit-tap-highlight-color: transparent;
     font-family: 'Inter', sans-serif;
 }
 
-/* Ocultar scrollbar pero permitir scroll */
+/* No Scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -16,9 +16,7 @@ body {
     scrollbar-width: none;
 }
 
-/* ANIMACIONES */
-
-/* Pop-in suave para modales */
+/* Animations */
 @keyframes popIn {
     0% { opacity: 0; transform: scale(0.95); }
     100% { opacity: 1; transform: scale(1); }
@@ -28,29 +26,26 @@ body {
     animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Temblor para Modo Caos */
 @keyframes shake {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-4px, 4px) rotate(-2deg); }
-    50% { transform: translate(4px, -4px) rotate(2deg); }
-    75% { transform: translate(-4px, -4px) rotate(-1deg); }
+    25% { transform: translate(-3px, 3px) rotate(-1deg); }
+    50% { transform: translate(3px, -3px) rotate(1deg); }
+    75% { transform: translate(-3px, -3px) rotate(-1deg); }
 }
 
 .animate-shake {
     animation: shake 0.3s linear infinite;
 }
 
-/* Flotar suave para los anuncios */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
+    50% { transform: translateY(-3px); }
 }
 
 .animate-float {
     animation: float 5s ease-in-out infinite;
 }
 
-/* Cursor de Terminal */
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -60,23 +55,19 @@ body {
     animation: blink 1s step-end infinite;
 }
 
-/* Efecto Glitch para texto */
 @keyframes glitch {
   0% { transform: translate(0) }
-  20% { transform: translate(-2px, 2px) }
-  40% { transform: translate(-2px, -2px) }
-  60% { transform: translate(2px, 2px) }
-  80% { transform: translate(2px, -2px) }
+  20% { transform: translate(-1px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(1px, 1px) }
+  80% { transform: translate(1px, -1px) }
   100% { transform: translate(0) }
 }
 .glitch-text {
     animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-    color: #ff0000;
-    text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px #ff0000;
 }
 
-/* Transiciones suaves para botones */
 #download-btn {
     transition: background-color 0.2s, transform 0.1s;
-    /* top/left se maneja con JS */
 }
